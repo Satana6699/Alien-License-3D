@@ -1,0 +1,21 @@
+﻿{
+    "size": { "x": 10, "y": 10 },
+    "movesCount": 5,
+    "puzzleBlocks": [
+        { "positions": [ { "x": 5, "y": 5 }, { "x": 6, "y": 5 } ], "blockType": "player_sofa" },
+        { "positions": [ { "x": 5, "y": 6 }, { "x": 6, "y": 6 } ], "blockType": "end_level_2_1" },
+        { "positions": [ { "x": 0, "y": 0 }, { "x": 1, "y": 0 } ], "blockType": "air_hockey" },
+        { "positions": [ { "x": 2, "y": 0 }, { "x": 3, "y": 0 } ], "blockType": "air_hockey" },
+        { "positions": [ { "x": 4, "y": 0 }, { "x": 5, "y": 0 } ], "blockType": "air_hockey" },
+        { "positions": [ { "x": 6, "y": 0 }, { "x": 7, "y": 0 } ], "blockType": "air_hockey" },
+        { "positions": [ { "x": 0, "y": 2 }, { "x": 0, "y": 3 } ], "blockType": "bed" },
+        { "positions": [ { "x": 1, "y": 2 }, { "x": 1, "y": 3 } ], "blockType": "bed" },
+        { "positions": [ { "x": 2, "y": 2 }, { "x": 2, "y": 3 } ], "blockType": "bed" },
+        { "positions": [ { "x": 3, "y": 2 }, { "x": 3, "y": 3 } ], "blockType": "bed" },
+        { "positions": [ { "x": 4, "y": 2 }, { "x": 4, "y": 3 } ], "blockType": "bed" }
+    ],
+    "lightBlocks": [
+        { "positions": [ { "x": 5, "y": 3 }, { "x": 5, "y": 4 } ], "blockType": "light_1_2" },
+        { "positions": [ { "x": 5, "y": 1 } ], "blockType": "light_1_1" }
+    ]
+}
