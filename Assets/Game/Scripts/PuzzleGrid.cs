@@ -48,6 +48,17 @@ namespace Game.Scripts
                     }
                 }
             }
+            
+            if (_lightBlocks != null)
+            {
+                foreach (PuzzleBlock lightBlock in _lightBlocks)
+                {
+                    if (lightBlock != null)
+                    {
+                        Destroy(lightBlock.gameObject);
+                    }
+                }
+            }
 
             _grid = grid;
             _endLevelBlock = endLevelBlock;
@@ -279,20 +290,29 @@ namespace Game.Scripts
             if (_currentPuzzleBlock)
             {
                 _currentPuzzleBlock.CurrentPos = new Vector2Int(x, y);
+                IsBlockInLight();
                 _currentPuzzleBlock = null;
             }
         }
 
         private void IsBlockInLight()
         {
-            
+            var lightBlock = 
+                _lightBlocks[_currentPuzzleBlock.CurrentPos.x, _currentPuzzleBlock.CurrentPos.y];
+
+            if (lightBlock && lightBlock.Size.Equals(_currentPuzzleBlock.Size) && 
+                !_currentPuzzleBlock.TryGetComponent(out Player player))
+            {
+                Destroy(_currentPuzzleBlock.gameObject);
+                Destroy(lightBlock.gameObject);
+            }
         }
         
-        private bool IsLevelCompleted(int plaxeX, int plaxeY)
+        private bool IsLevelCompleted(int x, int y)
         {
             if (_currentPuzzleBlock.gameObject.TryGetComponent(out Player player) &&
-                _endLevelBlock.CurrentPos.x == plaxeX &&
-                _endLevelBlock.CurrentPos.y == plaxeY)
+                _endLevelBlock.CurrentPos.x == x &&
+                _endLevelBlock.CurrentPos.y == y)
             {
                 GameWin();
                 return true;
@@ -301,9 +321,9 @@ namespace Game.Scripts
             return false;
         }
 
-        private void SpendMove(int plaxeX, int plaxeY)
+        private void SpendMove(int x, int y)
         {
-            if (_currentPuzzleBlock.CurrentPos != new Vector2Int(plaxeX, plaxeY))
+            if (_currentPuzzleBlock.CurrentPos != new Vector2Int(x, y))
             {
                 movesCount--;
 
