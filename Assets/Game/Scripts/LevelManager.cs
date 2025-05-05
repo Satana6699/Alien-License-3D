@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Game.Scripts.Data;
+using Game.Scripts.New;
 using Game.Scripts.Tags;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Scripts
@@ -14,7 +14,7 @@ namespace Game.Scripts
         [SerializeField] private Button backLevelButton;
         [SerializeField] private Button[] restartButtons;
         [SerializeField] private TextMeshProUGUI currentLevelText;
-        [SerializeField] private PuzzleGrid puzzleGrid;
+        [SerializeField] private PuzzleGridManager puzzleGrid;
         [SerializeField] private int maxLevels = 3;
 
         private int _currentLevel = 1;
@@ -67,20 +67,26 @@ namespace Game.Scripts
         private void InitializeLevel()
         {
             var data = JsonLoader.LoadLevel($"Levels/Level{_currentLevel}");
-
             puzzleGrid.GridSize = new Vector2Int(data.size.x, data.size.y);
-            PuzzleBlock[,] puzzleBlocks = new PuzzleBlock[puzzleGrid.GridSize.x, puzzleGrid.GridSize.y];
+
+            PuzzleBlock[,] puzzleBlocks = new PuzzleBlock[data.size.x, data.size.y];
 
             PuzzleBlock endLevelBlock = null;
             PuzzleBlock playerBlock = null;
 
             InitPuzzleBlock(data, puzzleBlocks, ref endLevelBlock, ref playerBlock);
             
-            PuzzleBlock[,] lightBlocks = new PuzzleBlock[puzzleGrid.GridSize.x, puzzleGrid.GridSize.y];
+            PuzzleBlock[,] lightBlocks = new PuzzleBlock[data.size.x, data.size.y];
             InitLightBlocks(data, lightBlocks);
             
-            puzzleGrid.InitializeLevel(puzzleBlocks, endLevelBlock, lightBlocks, playerBlock, data.movesCount);
-            AdjustGroundToGrid();
+            puzzleGrid.InitializeLevel(
+                grid: puzzleBlocks, 
+                endLevelBlock: endLevelBlock, 
+                lightBlocks: lightBlocks, 
+                playerBlock: playerBlock, 
+                movesCount: data.movesCount);
+            
+            AdjustGroundToGrid(data);
         }
 
         private void InitLightBlocks(LevelData data, PuzzleBlock[,] lightBlocks)
@@ -136,13 +142,13 @@ namespace Game.Scripts
             return instantiate;
         }
 
-        private void AdjustGroundToGrid()
+        private void AdjustGroundToGrid(LevelData data)
         {
             // GridSize напрямую отражает размер сетки в юнитах
-            puzzleGrid.transform.localScale = new Vector3(puzzleGrid.GridSize.x, 0.1f, puzzleGrid.GridSize.y);
+            puzzleGrid.transform.localScale = new Vector3(data.size.x, 0.1f, data.size.y);
 
             // Смещение, чтобы левый нижний угол имел позицию 0,0
-            puzzleGrid.transform.position = new Vector3(puzzleGrid.GridSize.x / 2f - 0.5f, 0f, puzzleGrid.GridSize.y / 2f - 0.5f);
+            puzzleGrid.transform.position = new Vector3(data.size.x / 2f - 0.5f, 0f, data.size.y / 2f - 0.5f);
         }
 
         private void RestartLevel()
