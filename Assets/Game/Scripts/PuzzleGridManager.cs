@@ -46,6 +46,10 @@ namespace Game.Scripts.New
 
             Grid = grid;
             LightBlocks = lightBlocks;
+            
+            if (EndBlock)
+                Destroy(EndBlock.gameObject);
+            
             EndBlock = endLevelBlock;
             PlayerBlock = playerBlock;
             CurrentBlock = null;

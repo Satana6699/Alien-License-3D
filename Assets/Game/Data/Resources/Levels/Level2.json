@@ -16,6 +16,6 @@
     ],
     "lightBlocks": [
         { "positions": [ { "x": 5, "y": 3 }, { "x": 5, "y": 4 } ], "blockType": "light_1_2" },
-        { "positions": [ { "x": 5, "y": 1 } ], "blockType": "light_1_1" }
+        { "positions": [ { "x": 5, "y": 1 }, { "x": 6, "y": 1 } ], "blockType": "light_2_1" }
     ]
 }

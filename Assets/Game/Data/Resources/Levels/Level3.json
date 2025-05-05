@@ -1,6 +1,6 @@
 ﻿{
     "size": { "x": 8, "y": 8 },
-    "movesCount": 1,
+    "movesCount": 3,
     "puzzleBlocks": [
         { "positions": [ { "x": 5, "y": 5 } ], "blockType": "player_chair" },
         { "positions": [ { "x": 5, "y": 6 } ], "blockType": "end_level_1_1" },
@@ -15,6 +15,6 @@
         { "positions": [ { "x": 6, "y": 5 }, { "x": 6, "y": 6 } ], "blockType": "bed" }
     ],
     "lightBlocks": [
-        { "positions": [ { "x": 0, "y": 5 } ], "blockType": "light_1_1" }
+        { "positions": [ { "x": 0, "y": 5 }, { "x": 1, "y": 5 } ], "blockType": "light_2_1" }
     ]
 }
